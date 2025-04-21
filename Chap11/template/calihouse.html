@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dự đoán giá nhà California</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 30px;
+        background: #f9f9f9;
+        width: 1200px;
+        margin: 0 auto;
+      }
+      #frm {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      h2 {
+        color: #333;
+      }
+
+      form {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        width: 400px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      input[type="number"] {
+        width: 100%;
+        padding: 8px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        background: #007bff;
+        color: white;
+        padding: 10px;
+        border: none;
+        width: 100%;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #0056b3;
+      }
+
+      #result {
+        margin-top: 20px;
+        font-size: 18px;
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="frm">
+      <form id="prediction-form">
+        <h2>Dự đoán giá nhà California </h2>
+        <label>MedInc:</label>
+        <input
+          type="number"
+          placeholder="Thu nhập trung bình (10k USD)"
+          step="any"
+          id="MedInc"
+          required
+          value="4.5"
+        />
+
+        <label>HouseAge:</label>
+        <input
+          type="number"
+          placeholder="Tuổi của nhà"
+          step="any"
+          id="HouseAge"
+          required
+          value="20"
+        />
+
+        <label>AveRooms:</label>
+        <input type="number" step="any" id="AveRooms" required value="6" />
+
+        <label>AveOccup:</label>
+        <input type="number" step="any" id="AveOccup" required value="3" />
+
+        <label>Latitude:</label>
+        <input type="number" step="any" id="Latitude" required value="37.88" />
+
+        <label>Longitude:</label>
+        <input
+          type="number"
+          step="any"
+          id="Longitude"
+          required
+          value="-122.23"
+        />
+        <label>AveHouseVal:</label>
+        <input type="number" step="any" id="AveHouseVal" required value="2.5" />
+        <div id="result"></div>
+        <button type="submit">Dự đoán</button>
+      </form>
+    </div>
+
+    
+
+    <script>
+      document
+        .getElementById("prediction-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const data = {
+            MedInc: parseFloat(document.getElementById("MedInc").value),
+            HouseAge: parseFloat(document.getElementById("HouseAge").value),
+            AveRooms: parseFloat(document.getElementById("AveRooms").value),
+            AveOccup: parseFloat(document.getElementById("AveOccup").value),
+            Latitude: parseFloat(document.getElementById("Latitude").value),
+            Longitude: parseFloat(document.getElementById("Longitude").value),
+            // population: parseFloat(document.getElementById("population").value),
+            AveHouseVal: parseFloat(
+              document.getElementById("AveHouseVal").value
+            ),
+          };
+
+          fetch("http://127.0.0.1:8000/predict", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              document.getElementById(
+                "result"
+              ).innerText = `Giá nhà dự đoán: $${data.prediction.toFixed(2)} nghìn USD`;
+            })
+            .catch((err) => {
+              console.error("Lỗi:", err);
+              document.getElementById("result").innerText = "Lỗi khi gọi API";
+            });
+        });
+    </script>
+  </body>
+</html>
