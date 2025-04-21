@@ -33,3 +33,4 @@ def update_book(db: Session, book_id: int, updated_book_data: dict):
     db.commit()
     db.refresh(book)
     return book
+

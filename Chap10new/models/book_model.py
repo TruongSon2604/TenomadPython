@@ -9,3 +9,4 @@ class Book(Base):
     author = Column(String(255), nullable=False)
     description = Column(String(1000))
     image = Column(String(500))
+    
