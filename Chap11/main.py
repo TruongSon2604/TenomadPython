@@ -9,7 +9,6 @@ from fastapi.responses import HTMLResponse
 app= FastAPI()
 model = joblib.load("model.pkl")
 
-# Thêm CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://127.0.0.1:5500"],

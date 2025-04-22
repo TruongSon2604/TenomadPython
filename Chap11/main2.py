@@ -7,7 +7,6 @@ from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
-# Thêm middleware CORS để chấp nhận yêu cầu từ tất cả các nguồn (hoặc bạn có thể giới hạn ở một nguồn cụ thể)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -16,7 +15,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Load mô hình và scaler đã được train từ trước
 model = joblib.load("california_housing_model_no_population.pkl")
 scaler = joblib.load("scaler_no_population.pkl")
 
@@ -29,7 +27,6 @@ class HousingData(BaseModel):
     Longitude: float
     AveHouseVal: float
 
-# API endpoint dự đoán giá nhà
 @app.post("/predict")
 async def predict(data: HousingData):
     input_data = np.array([[
