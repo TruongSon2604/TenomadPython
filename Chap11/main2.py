@@ -17,6 +17,7 @@ app.add_middleware(
 
 model = joblib.load("california_housing_model_no_population.pkl")
 scaler = joblib.load("scaler_no_population.pkl")
+model_rmse = joblib.load("model_rmse.pkl")
 
 class HousingData(BaseModel):
     MedInc: float
@@ -35,4 +36,7 @@ async def predict(data: HousingData):
     ]])
     input_scaled = scaler.transform(input_data)
     prediction = model.predict(input_scaled)
-    return {"prediction": prediction[0]}
+    return {
+        "prediction": float(prediction[0]),
+        "model_rmse": float(model_rmse)
+    }
