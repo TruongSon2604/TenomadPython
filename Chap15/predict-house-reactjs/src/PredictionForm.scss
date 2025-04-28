@@ -1,0 +1,78 @@
+#frm {
+  display: flex;
+  min-height: 90vh;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(120deg, #ece9ff 0%, #f4f7fa 100%);
+}
+
+#prediction-form {
+  background: #fff;
+  padding: 2.5rem 2rem 1.5rem 2rem;
+  border-radius: 15px;
+  box-shadow: 0px 5px 32px 5px rgba(75,85,120,0.11);
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+#prediction-form h2 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #2b2b48;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+#prediction-form label {
+  color: #555;
+  font-size: 0.99rem;
+  margin-top: 0.2rem;
+}
+
+#prediction-form input[type='number'] {
+  padding: 7px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 0.16rem;
+  font-size: 1.01rem;
+  outline: none;
+  transition: border 0.2s;
+}
+#prediction-form input[type='number']:focus {
+  border: 1.5px solid #624de3;
+}
+
+#prediction-form #result {
+  min-height: 22px;
+  color: #3c71c2;
+  margin-top: 0.6rem;
+  margin-bottom: 0.7rem;
+  text-align: center;
+  font-size: 1.04rem;
+}
+#rmse{
+  min-height: 22px;
+  color: #3c71c2;
+  margin-top: 0.6rem;
+  margin-bottom: 0.7rem;
+  text-align: center;
+  font-size: 1.04rem;
+}
+
+#prediction-form button {
+  background: linear-gradient(90deg, #624de3 60%, #4e74b8 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.65em 0;
+  font-size: 1.07rem;
+  cursor: pointer;
+  transition: background 0.19s;
+  font-weight: 500;
+}
+#prediction-form button:disabled {
+  opacity: 0.68;
+  cursor: not-allowed;
+}
